@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="description"
+    content="CountdownBoost is a lightweight Shopify countdown banner app with customizable messaging, colors, timing, and call-to-action settings."
+  >
+
+  <title>CountdownBoost | Valoy Tech Studio</title>
+
+  <link rel="stylesheet" href="assets/style.css">
+
+  <style>
+    .product-hero {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 90px 20px 70px;
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 56px;
+      align-items: center;
+    }
+
+    .product-eyebrow {
+      display: inline-block;
+      padding: 8px 15px;
+      margin-bottom: 22px;
+      border: 1px solid #2563eb;
+      border-radius: 999px;
+      background: rgba(37, 99, 235, .1);
+      color: #60a5fa;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .product-hero h1 {
+      margin: 0 0 22px;
+      font-size: 62px;
+      line-height: 1.04;
+      letter-spacing: -.05em;
+    }
+
+    .product-hero p {
+      max-width: 680px;
+      margin: 0 0 28px;
+    }
+
+    .product-panel {
+      position: relative;
+      overflow: hidden;
+      padding: 28px;
+      border: 1px solid #25324a;
+      border-radius: 24px;
+      background:
+        radial-gradient(circle at top right, rgba(56, 189, 248, .18), transparent 38%),
+        linear-gradient(180deg, #111827, #0d1525);
+      box-shadow: 0 30px 80px rgba(0, 0, 0, .35);
+    }
+
+    .product-panel-label {
+      margin-bottom: 18px;
+      color: #8ea6c9;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .banner-preview {
+      overflow: hidden;
+      border: 1px solid #334155;
+      border-radius: 16px;
+      background: #0f172a;
+    }
+
+    .banner-preview-top {
+      padding: 12px 16px;
+      background: linear-gradient(135deg, #2563eb, #38bdf8);
+      color: #fff;
+      font-size: 14px;
+      font-weight: 800;
+      text-align: center;
+    }
+
+    .banner-preview-body {
+      padding: 24px;
+    }
+
+    .banner-preview-body h3 {
+      margin: 0 0 10px;
+      font-size: 22px;
+    }
+
+    .banner-preview-body p {
+      margin: 0 0 20px;
+      color: #9fb2ce;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    .timer-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 9px;
+      margin: 20px 0;
+    }
+
+    .timer-box {
+      padding: 13px 8px;
+      border: 1px solid #273449;
+      border-radius: 12px;
+      background: #111c30;
+      text-align: center;
+    }
+
+    .timer-box strong {
+      display: block;
+      margin-bottom: 3px;
+      font-size: 20px;
+    }
+
+    .timer-box span {
+      color: #8298b8;
+      font-size: 11px;
+      text-transform: uppercase;
+    }
+
+    .preview-button {
+      display: inline-block;
+      padding: 11px 16px;
+      border-radius: 10px;
+      background: #f8fafc;
+      color: #0f172a;
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .section-intro {
+      max-width: 760px;
+      margin-bottom: 30px;
+    }
+
+    .feature-check {
+      display: flex;
+      gap: 13px;
+      align-items: flex-start;
+    }
+
+    .check-icon {
+      flex: 0 0 auto;
+      width: 28px;
+      height: 28px;
+      display: grid;
+      place-items: center;
+      margin-top: 2px;
+      border: 1px solid rgba(56, 189, 248, .35);
+      border-radius: 9px;
+      background: rgba(56, 189, 248, .1);
+      color: #38bdf8;
+      font-weight: 900;
+    }
+
+    .use-case {
+      min-height: 190px;
+    }
+
+    .step-number {
+      display: inline-grid;
+      width: 38px;
+      height: 38px;
+      place-items: center;
+      margin-bottom: 16px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #2563eb, #38bdf8);
+      color: #fff;
+      font-weight: 900;
+    }
+
+    .status-card {
+      border-color: rgba(56, 189, 248, .28);
+      background:
+        radial-gradient(circle at top right, rgba(37, 99, 235, .17), transparent 45%),
+        #111827;
+    }
+
+    .status-pill {
+      display: inline-block;
+      padding: 7px 12px;
+      margin-bottom: 14px;
+      border: 1px solid rgba(34, 197, 94, .35);
+      border-radius: 999px;
+      background: rgba(34, 197, 94, .09);
+      color: #86efac;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .product-cta {
+      max-width: 1180px;
+      margin: 20px auto 80px;
+      padding: 46px 34px;
+      border: 1px solid #26344b;
+      border-radius: 25px;
+      background:
+        radial-gradient(circle at top right, rgba(56, 189, 248, .2), transparent 38%),
+        linear-gradient(135deg, #111827, #0b1324);
+      text-align: center;
+    }
+
+    .product-cta h2 {
+      margin: 0 0 14px;
+    }
+
+    .product-cta p {
+      max-width: 700px;
+      margin: 0 auto 24px;
+    }
+
+    @media (max-width: 860px) {
+      .product-hero {
+        grid-template-columns: 1fr;
+        padding-top: 65px;
+      }
+
+      .product-hero h1 {
+        font-size: 47px;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .timer-row {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <a class="logo" href="index.html">
+      Valoy Tech Studio
+    </a>
+
+    <div>
+      <a href="index.html#apps">Apps</a>
+      <a href="about.html">About</a>
+      <a href="index.html#faq">FAQ</a>
+      <a href="support.html">Support</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+    </div>
+  </nav>
+
+
+  <!-- Product hero -->
+  <header class="product-hero">
+
+    <div>
+      <div class="product-eyebrow">
+        Urgency and promotion tools
+      </div>
+
+      <h1>
+        CountdownBoost
+      </h1>
+
+      <p>
+        Create customizable countdown banners for limited-time
+        promotions, launches, and important store announcements
+        without writing code.
+      </p>
+
+      <a class="btn primary" href="#features">
+        Explore features
+      </a>
+
+      <a class="btn secondary" href="support.html">
+        Contact support
+      </a>
+    </div>
+
+
+    <div class="product-panel">
+
+      <div class="product-panel-label">
+        Storefront banner preview
+      </div>
+
+      <div class="banner-preview">
+
+        <div class="banner-preview-top">
+          Limited-time promotion
+        </div>
+
+        <div class="banner-preview-body">
+
+          <h3>
+            Summer offer ends soon
+          </h3>
+
+          <p>
+            Show customers a clear deadline and guide them
+            toward your selected promotion.
+          </p>
+
+          <div class="timer-row">
+
+            <div class="timer-box">
+              <strong>02</strong>
+              <span>Days</span>
+            </div>
+
+            <div class="timer-box">
+              <strong>14</strong>
+              <span>Hours</span>
+            </div>
+
+            <div class="timer-box">
+              <strong>38</strong>
+              <span>Minutes</span>
+            </div>
+
+            <div class="timer-box">
+              <strong>21</strong>
+              <span>Seconds</span>
+            </div>
+
+          </div>
+
+          <span class="preview-button">
+            Shop now
+          </span>
+
+        </div>
+      </div>
+    </div>
+
+  </header>
+
+
+  <!-- Overview -->
+  <section class="section">
+
+    <div class="section-intro">
+      <small>Product overview</small>
+
+      <h2>
+        Add clear, time-sensitive messaging to your storefront.
+      </h2>
+
+      <p>
+        CountdownBoost gives merchants a focused set of controls for
+        creating an urgency banner with custom text, colors, timing,
+        and a call-to-action link.
+      </p>
+    </div>
+
+    <div class="grid">
+
+      <article class="card">
+        <div class="feature-check">
+          <span class="check-icon">✓</span>
+
+          <div>
+            <h3>Promotion countdown</h3>
+
+            <p>
+              Choose the end date and time for your campaign
+              and display a live countdown on the storefront.
+            </p>
+          </div>
+        </div>
+      </article>
+
+
+      <article class="card">
+        <div class="feature-check">
+          <span class="check-icon">✓</span>
+
+          <div>
+            <h3>Custom messaging</h3>
+
+            <p>
+              Configure the banner headline and promotional
+              message to match the current campaign.
+            </p>
+          </div>
+        </div>
+      </article>
+
+
+      <article class="card">
+        <div class="feature-check">
+          <span class="check-icon">✓</span>
+
+          <div>
+            <h3>Brand styling</h3>
+
+            <p>
+              Select background and text colors that fit
+              the visual identity of the store.
+            </p>
+          </div>
+        </div>
+      </article>
+
+
+      <article class="card">
+        <div class="feature-check">
+          <span class="check-icon">✓</span>
+
+          <div>
+            <h3>Call-to-action settings</h3>
+
+            <p>
+              Add custom button text and connect the banner
+              to a selected store or promotional page.
+            </p>
+          </div>
+        </div>
+      </article>
+
+
+      <article class="card">
+        <div class="feature-check">
+          <span class="check-icon">✓</span>
+
+          <div>
+            <h3>Simple enable control</h3>
+
+            <p>
+              Turn the banner on or off from the Shopify
+              admin settings page.
+            </p>
+          </div>
+        </div>
+      </article>
+
+
+      <article class="card">
+        <div class="feature-check">
+          <span class="check-icon">✓</span>
+
+          <div>
+            <h3>No coding required</h3>
+
+            <p>
+              Configure the banner through a clear merchant
+              interface without editing theme code manually.
+            </p>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+
+  <!-- Use cases -->
+  <section class="section" id="features">
+
+    <div class="section-intro">
+      <small>Common use cases</small>
+
+      <h2>
+        Built for time-sensitive store campaigns.
+      </h2>
+
+      <p>
+        CountdownBoost can support a range of promotional and
+        informational storefront campaigns.
+      </p>
+    </div>
+
+    <div class="grid">
+
+      <article class="card use-case">
+        <small>01</small>
+        <h3>Limited-time offers</h3>
+        <p>
+          Display a visible campaign deadline for temporary
+          discounts or storewide promotions.
+        </p>
+      </article>
+
+
+      <article class="card use-case">
+        <small>02</small>
+        <h3>Seasonal campaigns</h3>
+        <p>
+          Create banners for holidays, shopping events, and
+          other date-based store campaigns.
+        </p>
+      </article>
+
+
+      <article class="card use-case">
+        <small>03</small>
+        <h3>Product launches</h3>
+        <p>
+          Count down to a new product release, collection,
+          or scheduled announcement.
+        </p>
+      </article>
+
+
+      <article class="card use-case">
+        <small>04</small>
+        <h3>Important deadlines</h3>
+        <p>
+          Communicate shipping cutoffs, registration windows,
+          or other time-sensitive store information.
+        </p>
+      </article>
+
+    </div>
+  </section>
+
+
+  <!-- Workflow -->
+  <section class="section">
+
+    <div class="section-intro">
+      <small>Merchant workflow</small>
+
+      <h2>
+        Configure and launch in three steps.
+      </h2>
+    </div>
+
+    <div class="grid">
+
+      <article class="card">
+        <span class="step-number">1</span>
+        <h3>Set the campaign</h3>
+        <p>
+          Add the headline, promotional message, and countdown
+          end time.
+        </p>
+      </article>
+
+
+      <article class="card">
+        <span class="step-number">2</span>
+        <h3>Match the storefront</h3>
+        <p>
+          Choose the banner colors, button text, and destination
+          link.
+        </p>
+      </article>
+
+
+      <article class="card">
+        <span class="step-number">3</span>
+        <h3>Enable the banner</h3>
+        <p>
+          Save the configuration and activate CountdownBoost
+          for the storefront.
+        </p>
+      </article>
+
+    </div>
+  </section>
+
+
+  <!-- Availability -->
+  <section class="section">
+
+    <div class="grid">
+
+      <article class="card status-card">
+        <span class="status-pill">
+          Available
+        </span>
+
+        <h2>
+          Built for Shopify merchants.
+        </h2>
+
+        <p>
+          CountdownBoost is managed through Shopify admin and
+          uses a storefront theme app extension for displaying
+          the configured banner.
+        </p>
+      </article>
+
+
+      <article class="card">
+        <small>Support</small>
+
+        <h3>Direct assistance</h3>
+
+        <p>
+          Merchants can contact Valoy Tech Studio for help
+          reviewing setup questions or product issues.
+        </p>
+
+        <a class="btn secondary" href="support.html">
+          Visit support
+        </a>
+      </article>
+
+    </div>
+  </section>
+
+
+  <!-- FAQ -->
+  <section class="section">
+
+    <div class="section-intro">
+      <small>CountdownBoost FAQ</small>
+
+      <h2>
+        Frequently asked questions.
+      </h2>
+    </div>
+
+    <div class="grid">
+
+      <article class="card">
+        <h3>Do I need to write code?</h3>
+
+        <p>
+          No. Banner settings are configured through the app's
+          Shopify admin interface.
+        </p>
+      </article>
+
+
+      <article class="card">
+        <h3>Can I customize the banner colors?</h3>
+
+        <p>
+          Yes. CountdownBoost includes background and text
+          color settings.
+        </p>
+      </article>
+
+
+      <article class="card">
+        <h3>Can the banner link to a promotion?</h3>
+
+        <p>
+          Yes. Merchants can configure custom button text
+          and a destination link.
+        </p>
+      </article>
+
+
+      <article class="card">
+        <h3>Can I disable the banner?</h3>
+
+        <p>
+          Yes. The banner can be enabled or disabled through
+          the app settings.
+        </p>
+      </article>
+
+    </div>
+  </section>
+
+
+  <!-- Final CTA -->
+  <section class="product-cta">
+
+    <h2>
+      Create a clearer promotional deadline.
+    </h2>
+
+    <p>
+      Use CountdownBoost to configure a focused storefront
+      countdown banner without manually editing theme code.
+    </p>
+
+    <a class="btn primary" href="index.html#apps">
+      View all apps
+    </a>
+
+    <a class="btn secondary" href="support.html">
+      Contact support
+    </a>
+
+  </section>
+
+
+  <!-- Footer -->
+  <footer class="footer">
+
+    <div class="footer-inner">
+
+      <div>
+        <strong>Valoy Tech Studio</strong>
+
+        <p>
+          Practical Shopify apps for modern merchants.
+        </p>
+
+        <p>
+          © 2026 Valoy Tech Studio. All rights reserved.
+        </p>
+      </div>
+
+
+      <div>
+        <strong>Products</strong>
+
+        <p>
+          <a href="countdownboost.html">
+            CountdownBoost
+          </a>
+        </p>
+
+        <p>DeliveryPulse</p>
+        <p>RuleFlow</p>
+      </div>
+
+
+      <div>
+        <strong>Company</strong>
+
+        <p>
+          <a href="about.html">About</a>
+        </p>
+
+        <p>
+          <a href="support.html">Support</a>
+        </p>
+      </div>
+
+
+      <div>
+        <strong>Legal</strong>
+
+        <p>
+          <a href="privacy.html">Privacy Policy</a>
+        </p>
+
+        <p>
+          <a href="terms.html">Terms of Service</a>
+        </p>
+      </div>
+
+    </div>
+
+  </footer>
+
+</body>
+</html>

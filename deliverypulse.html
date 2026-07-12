@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="description"
+    content="DeliveryPulse helps Shopify merchants offer delivery date and time slot selection with preparation days, blocked dates, and availability controls."
+  >
+
+  <title>DeliveryPulse | Valoy Tech Studio</title>
+
+  <link rel="stylesheet" href="assets/style.css">
+
+  <style>
+    .product-hero {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 90px 20px 70px;
+      display: grid;
+      grid-template-columns: 1.08fr .92fr;
+      gap: 56px;
+      align-items: center;
+    }
+
+    .product-eyebrow {
+      display: inline-block;
+      padding: 8px 15px;
+      margin-bottom: 22px;
+      border: 1px solid #2563eb;
+      border-radius: 999px;
+      background: rgba(37, 99, 235, .1);
+      color: #60a5fa;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .product-hero h1 {
+      margin: 0 0 22px;
+      font-size: 62px;
+      line-height: 1.04;
+      letter-spacing: -.05em;
+    }
+
+    .product-hero p {
+      max-width: 680px;
+      margin: 0 0 28px;
+    }
+
+    .product-panel {
+      position: relative;
+      overflow: hidden;
+      padding: 28px;
+      border: 1px solid #25324a;
+      border-radius: 24px;
+      background:
+        radial-gradient(circle at top right, rgba(56, 189, 248, .18), transparent 38%),
+        linear-gradient(180deg, #111827, #0d1525);
+      box-shadow: 0 30px 80px rgba(0, 0, 0, .35);
+    }
+
+    .product-panel-label {
+      margin-bottom: 18px;
+      color: #8ea6c9;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .delivery-preview {
+      border: 1px solid #334155;
+      border-radius: 18px;
+      background: #0f172a;
+      overflow: hidden;
+    }
+
+    .delivery-preview-header {
+      padding: 18px 20px;
+      border-bottom: 1px solid #273449;
+    }
+
+    .delivery-preview-header small {
+      color: #38bdf8;
+      font-weight: 800;
+    }
+
+    .delivery-preview-header h3 {
+      margin: 7px 0 0;
+      font-size: 21px;
+    }
+
+    .delivery-preview-body {
+      padding: 22px;
+    }
+
+    .calendar-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 9px;
+      margin-bottom: 18px;
+    }
+
+    .date-box {
+      padding: 13px 8px;
+      border: 1px solid #2b3950;
+      border-radius: 12px;
+      background: #111c30;
+      text-align: center;
+    }
+
+    .date-box.active {
+      border-color: #38bdf8;
+      background: rgba(56, 189, 248, .12);
+    }
+
+    .date-box span {
+      display: block;
+      color: #8298b8;
+      font-size: 11px;
+      text-transform: uppercase;
+    }
+
+    .date-box strong {
+      display: block;
+      margin-top: 4px;
+      font-size: 19px;
+    }
+
+    .slot-label {
+      margin: 18px 0 10px;
+      color: #8ea6c9;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .slot-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 9px;
+    }
+
+    .slot {
+      padding: 11px 8px;
+      border: 1px solid #2b3950;
+      border-radius: 10px;
+      color: #cbd5e1;
+      font-size: 13px;
+      text-align: center;
+    }
+
+    .slot.active {
+      border-color: #38bdf8;
+      background: rgba(56, 189, 248, .1);
+      color: #fff;
+    }
+
+    .section-intro {
+      max-width: 760px;
+      margin-bottom: 30px;
+    }
+
+    .feature-check {
+      display: flex;
+      gap: 13px;
+      align-items: flex-start;
+    }
+
+    .check-icon {
+      flex: 0 0 auto;
+      width: 28px;
+      height: 28px;
+      display: grid;
+      place-items: center;
+      margin-top: 2px;
+      border: 1px solid rgba(56, 189, 248, .35);
+      border-radius: 9px;
+      background: rgba(56, 189, 248, .1);
+      color: #38bdf8;
+      font-weight: 900;
+    }
+
+    .step-number {
+      display: inline-grid;
+      width: 38px;
+      height: 38px;
+      place-items: center;
+      margin-bottom: 16px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #2563eb, #38bdf8);
+      color: #fff;
+      font-weight: 900;
+    }
+
+    .status-card {
+      border-color: rgba(56, 189, 248, .28);
+      background:
+        radial-gradient(circle at top right, rgba(37, 99, 235, .17), transparent 45%),
+        #111827;
+    }
+
+    .status-pill {
+      display: inline-block;
+      padding: 7px 12px;
+      margin-bottom: 14px;
+      border: 1px solid rgba(34, 197, 94, .35);
+      border-radius: 999px;
+      background: rgba(34, 197, 94, .09);
+      color: #86efac;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .product-cta {
+      max-width: 1180px;
+      margin: 20px auto 80px;
+      padding: 46px 34px;
+      border: 1px solid #26344b;
+      border-radius: 25px;
+      background:
+        radial-gradient(circle at top right, rgba(56, 189, 248, .2), transparent 38%),
+        linear-gradient(135deg, #111827, #0b1324);
+      text-align: center;
+    }
+
+    .product-cta h2 {
+      margin: 0 0 14px;
+    }
+
+    .product-cta p {
+      max-width: 700px;
+      margin: 0 auto 24px;
+    }
+
+    @media (max-width: 860px) {
+      .product-hero {
+        grid-template-columns: 1fr;
+        padding-top: 65px;
+      }
+
+      .product-hero h1 {
+        font-size: 47px;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .calendar-row {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .slot-row {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="nav">
+    <a class="logo" href="index.html">
+      Valoy Tech Studio
+    </a>
+
+    <div>
+      <a href="index.html#apps">Apps</a>
+      <a href="about.html">About</a>
+      <a href="index.html#faq">FAQ</a>
+      <a href="support.html">Support</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+    </div>
+  </nav>
+
+
+  <header class="product-hero">
+
+    <div>
+      <div class="product-eyebrow">
+        Delivery scheduling
+      </div>
+
+      <h1>
+        DeliveryPulse
+      </h1>
+
+      <p>
+        Let customers choose preferred delivery dates and time slots
+        while merchants control preparation time, unavailable dates,
+        and delivery availability.
+      </p>
+
+      <a class="btn primary" href="#features">
+        Explore features
+      </a>
+
+      <a class="btn secondary" href="support.html">
+        Contact support
+      </a>
+    </div>
+
+
+    <div class="product-panel">
+
+      <div class="product-panel-label">
+        Delivery selection preview
+      </div>
+
+      <div class="delivery-preview">
+
+        <div class="delivery-preview-header">
+          <small>DeliveryPulse</small>
+          <h3>Select your delivery date</h3>
+        </div>
+
+        <div class="delivery-preview-body">
+
+          <div class="calendar-row">
+
+            <div class="date-box">
+              <span>Mon</span>
+              <strong>14</strong>
+            </div>
+
+            <div class="date-box active">
+              <span>Tue</span>
+              <strong>15</strong>
+            </div>
+
+            <div class="date-box">
+              <span>Wed</span>
+              <strong>16</strong>
+            </div>
+
+            <div class="date-box">
+              <span>Thu</span>
+              <strong>17</strong>
+            </div>
+
+          </div>
+
+          <div class="slot-label">
+            Preferred time slot
+          </div>
+
+          <div class="slot-row">
+            <div class="slot">Morning</div>
+            <div class="slot active">Afternoon</div>
+            <div class="slot">Evening</div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </header>
+
+
+  <section class="section">
+
+    <div class="section-intro">
+      <small>Product overview</small>
+
+      <h2>
+        Give customers a clearer delivery scheduling experience.
+      </h2>
+
+      <p>
+        DeliveryPulse adds delivery date and time-slot selection to
+        the storefront while giving merchants practical controls for
+        managing availability.
+      </p>
+    </div>
+
+    <div class="grid">
+
+      <article class="card">
+        <div class="feature-check">
+          <span class="check-icon">✓</span>
+
+          <div>
+            <h3>Delivery date selection</h3>
+            <p>
+              Let customers choose an available delivery date
+              before completing their order.
+            </p>
+          </div>
+        </div>
+      </article>
+
+
+      <article class="card">
+        <div class="feature-check">
+          <span class="check-icon">✓</span>
+
+          <div>
+            <h3>Time-slot options</h3>
+            <p>
+              Offer morning, afternoon, and evening delivery
+              preferences.
+            </p>
+          </div>
+        </div>
+      </article>
+
+
+      <article class="card">
+        <div class="feature-check">
+          <span class="check-icon">✓</span>
+
+          <div>
+            <h3>Preparation days</h3>
+            <p>
+              Set the minimum number of days required before
+              an order can be delivered.
+            </p>
+          </div>
+        </div>
+      </article>
+
+
+      <article class="card">
+        <div class="feature-check">
+          <span class="check-icon">✓</span>
+
+          <div>
+            <h3>Blocked dates</h3>
+            <p>
+              Prevent customers from selecting holidays,
+              closed dates, or unavailable delivery days.
+            </p>
+          </div>
+        </div>
+      </article>
+
+
+      <article class="card">
+        <div class="feature-check">
+          <span class="check-icon">✓</span>
+
+          <div>
+            <h3>Sunday availability control</h3>
+            <p>
+              Disable Sunday delivery when it is not available
+              for the store.
+            </p>
+          </div>
+        </div>
+      </article>
+
+
+      <article class="card">
+        <div class="feature-check">
+          <span class="check-icon">✓</span>
+
+          <div>
+            <h3>Order details saved</h3>
+            <p>
+              Selected delivery information is stored with the
+              order for merchant reference.
+            </p>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+
+  <section class="section" id="features">
+
+    <div class="section-intro">
+      <small>Common use cases</small>
+
+      <h2>
+        Designed for stores that plan delivery ahead.
+      </h2>
+
+      <p>
+        DeliveryPulse supports merchants that need customers to choose
+        delivery timing before an order is fulfilled.
+      </p>
+    </div>
+
+    <div class="grid">
+
+      <article class="card">
+        <small>01</small>
+        <h3>Local delivery</h3>
+        <p>
+          Collect preferred delivery dates for stores managing
+          their own local delivery routes.
+        </p>
+      </article>
+
+
+      <article class="card">
+        <small>02</small>
+        <h3>Bakery and food orders</h3>
+        <p>
+          Give merchants preparation time before scheduled
+          food or custom-order delivery.
+        </p>
+      </article>
+
+
+      <article class="card">
+        <small>03</small>
+        <h3>Scheduled fulfillment</h3>
+        <p>
+          Help organize orders that must be prepared and delivered
+          on specific dates.
+        </p>
+      </article>
+
+
+      <article class="card">
+        <small>04</small>
+        <h3>Holiday availability</h3>
+        <p>
+          Block dates when the business cannot accept or fulfill
+          delivery requests.
+        </p>
+      </article>
+
+    </div>
+  </section>
+
+
+  <section class="section">
+
+    <div class="section-intro">
+      <small>Merchant workflow</small>
+
+      <h2>
+        Configure delivery availability in three steps.
+      </h2>
+    </div>
+
+    <div class="grid">
+
+      <article class="card">
+        <span class="step-number">1</span>
+        <h3>Set preparation time</h3>
+        <p>
+          Choose how many days are required before delivery
+          becomes available.
+        </p>
+      </article>
+
+
+      <article class="card">
+        <span class="step-number">2</span>
+        <h3>Manage availability</h3>
+        <p>
+          Configure blocked dates, Sunday availability,
+          and selectable time slots.
+        </p>
+      </article>
+
+
+      <article class="card">
+        <span class="step-number">3</span>
+        <h3>Collect customer choices</h3>
+        <p>
+          Customers select their preferred date and time,
+          and the information is saved with the order.
+        </p>
+      </article>
+
+    </div>
+  </section>
+
+
+  <section class="section">
+
+    <div class="grid">
+
+      <article class="card status-card">
+        <span class="status-pill">
+          Available
+        </span>
+
+        <h2>
+          Built for Shopify delivery workflows.
+        </h2>
+
+        <p>
+          DeliveryPulse is configured through Shopify admin and
+          displays delivery selection through the storefront theme
+          app extension.
+        </p>
+      </article>
+
+
+      <article class="card">
+        <small>Support</small>
+
+        <h3>Direct merchant assistance</h3>
+
+        <p>
+          Contact Valoy Tech Studio for help reviewing delivery
+          settings, storefront setup, or product issues.
+        </p>
+
+        <a class="btn secondary" href="support.html">
+          Visit support
+        </a>
+      </article>
+
+    </div>
+  </section>
+
+
+  <section class="section">
+
+    <div class="section-intro">
+      <small>DeliveryPulse FAQ</small>
+
+      <h2>
+        Frequently asked questions.
+      </h2>
+    </div>
+
+    <div class="grid">
+
+      <article class="card">
+        <h3>Do customers select a delivery date?</h3>
+        <p>
+          Yes. Customers can select from the delivery dates
+          made available by the merchant.
+        </p>
+      </article>
+
+
+      <article class="card">
+        <h3>Can I block specific dates?</h3>
+        <p>
+          Yes. Merchants can add dates that should not be
+          available for customer selection.
+        </p>
+      </article>
+
+
+      <article class="card">
+        <h3>Can I require preparation time?</h3>
+        <p>
+          Yes. DeliveryPulse includes a minimum preparation-days
+          setting.
+        </p>
+      </article>
+
+
+      <article class="card">
+        <h3>Are delivery time slots supported?</h3>
+        <p>
+          Yes. Customers can choose from morning, afternoon,
+          and evening time-slot options.
+        </p>
+      </article>
+
+    </div>
+  </section>
+
+
+  <section class="product-cta">
+
+    <h2>
+      Make delivery scheduling clearer for customers.
+    </h2>
+
+    <p>
+      Use DeliveryPulse to collect preferred delivery dates and
+      time slots while maintaining control over store availability.
+    </p>
+
+    <a class="btn primary" href="index.html#apps">
+      View all apps
+    </a>
+
+    <a class="btn secondary" href="support.html">
+      Contact support
+    </a>
+
+  </section>
+
+
+  <footer class="footer">
+
+    <div class="footer-inner">
+
+      <div>
+        <strong>Valoy Tech Studio</strong>
+
+        <p>
+          Practical Shopify apps for modern merchants.
+        </p>
+
+        <p>
+          © 2026 Valoy Tech Studio. All rights reserved.
+        </p>
+      </div>
+
+
+      <div>
+        <strong>Products</strong>
+
+        <p>
+          <a href="countdownboost.html">
+            CountdownBoost
+          </a>
+        </p>
+
+        <p>
+          <a href="deliverypulse.html">
+            DeliveryPulse
+          </a>
+        </p>
+
+        <p>RuleFlow</p>
+      </div>
+
+
+      <div>
+        <strong>Company</strong>
+
+        <p>
+          <a href="about.html">About</a>
+        </p>
+
+        <p>
+          <a href="support.html">Support</a>
+        </p>
+      </div>
+
+
+      <div>
+        <strong>Legal</strong>
+
+        <p>
+          <a href="privacy.html">Privacy Policy</a>
+        </p>
+
+        <p>
+          <a href="terms.html">Terms of Service</a>
+        </p>
+      </div>
+
+    </div>
+
+  </footer>
+
+</body>
+</html>
